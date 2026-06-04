@@ -1,4 +1,4 @@
-import certifi
+```python
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from typing import AsyncGenerator
 from .core.config import settings
@@ -10,14 +10,13 @@ database: AsyncIOMotorDatabase = None
 async def init_db():
     global client, database
     try:
-        client = AsyncIOMotorClient(
-            settings.MONGO_URI,
-            tlsCAFile=certifi.where()
-        )
+        client = AsyncIOMotorClient(settings.MONGO_URI)
         
+        # Extract db name from URI, fall back to settings.DB_NAME or hardcoded default
         db_name = settings.MONGO_URI.split('/')[-1].split('?')[0]
         
         if not db_name:
+            # Fallback: use DB_NAME from settings if it exists, otherwise use default
             db_name = getattr(settings, 'DB_NAME', 'carbon_tracker_db')
             print(f"⚠️  No DB name found in URI, using: '{db_name}'")
         
