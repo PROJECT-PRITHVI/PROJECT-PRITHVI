@@ -18,7 +18,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # CSV file paths
 MONTHLY_CSV_FILE = os.path.join(script_dir, '..', 'feature 1', 'monthly_emissions_summary.csv')
 AVERAGE_CSV_FILE = os.path.join(script_dir, '..', 'feature 1', 'average_emissions.csv')
-HOTSPOT_CSV_FILE = os.path.join(script_dir, '..', 'feature 2', 'emission_analysis_results.csv')  # NEW
+HOTSPOT_CSV_FILE = os.path.join(script_dir, '..', 'feature 2', 'emission_analysis_results.csv')  
 
 def ingest_data():
     """Reads CSV files and uploads their contents to designated MongoDB collections."""

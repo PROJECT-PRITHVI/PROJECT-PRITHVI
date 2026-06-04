@@ -32,10 +32,9 @@ async def on_startup():
     print("Initializing MongoDB connection...")
     await init_db()
 
-# Include the main API router with a version prefix
-app.include_router(api_router, prefix="/api/v1") # FIX 3: Use the imported api_router object
 
-# Basic root endpoint for health check
+app.include_router(api_router, prefix="/api/v1") 
+
 @app.get("/")
 def read_root():
     return {"message": f"{settings.PROJECT_NAME} is running! Visit /docs for the Swagger UI."}
