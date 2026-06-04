@@ -14,7 +14,7 @@ app = FastAPI(
 # --- CORS CONFIGURATION ---
 # Vital for Frontend Integration: Explicitly allow localhost:3000 (React)
 # We combine the settings list with development origins to ensure the dashboard works immediately.
-origins = ["http://localhost:3000", "http://localhost:8000"]
+origins = ["https://your-app.vercel.app"]
 if hasattr(settings, "CORS_ORIGINS") and settings.CORS_ORIGINS:
     origins.extend(settings.CORS_ORIGINS)
 
