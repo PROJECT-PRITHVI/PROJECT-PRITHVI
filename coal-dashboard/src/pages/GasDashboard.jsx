@@ -229,16 +229,16 @@ const GasOverview = ({ onNextPage }) => {
     const fetchAllData = useCallback(async () => {
         setIsLoading(true);
         try {
-            const monthlyResponse = await fetch('http://127.0.0.1:8000/api/v1/emissions/monthly/');
+            const monthlyResponse = await fetch('${import.meta.env.VITE_API_URL}/api/v1/emissions/monthly/');
             const monthlyData = await (monthlyResponse.ok ? monthlyResponse.json() : []);
             
-            const averageResponse = await fetch('http://127.0.0.1:8000/api/v1/emissions/average/');
+            const averageResponse = await fetch('${import.meta.env.VITE_API_URL}/api/v1/emissions/average/');
             const averageData = await (averageResponse.ok ? averageResponse.json() : {});
 
-            const hotspotResponse = await fetch('http://127.0.0.1:8000/api/v1/hotspots?limit=1000');
+            const hotspotResponse = await fetch('${import.meta.env.VITE_API_URL}/api/v1/hotspots?limit=1000');
             const hotspotData = await (hotspotResponse.ok ? hotspotResponse.json() : { data: [] });
 
-            const statsResponse = await fetch('http://127.0.0.1:8000/api/v1/hotspots/stats');
+            const statsResponse = await fetch('${import.meta.env.VITE_API_URL}/api/v1/hotspots/stats');
             const statsData = await (statsResponse.ok ? statsResponse.json() : { stats: {} });
 
             const monthlyRaw = monthlyData.map(item => ({month: item.Month || 'N/A', CO2_ppm: item.CO2_ppm || 0, CH4_ppm: item.CH4_ppm || 0, PM10: item.PM10 || 0, PM2_5: item.PM2_5 || 0}));
@@ -495,7 +495,7 @@ const MineOffsetDashboard = ({ onBack }) => {
         setError(null);
         try {
             // --- CORRECTION: Added '/emissions' to the URL to match router prefix ---
-            const response = await fetch(`http://127.0.0.1:8000/api/v1/emissions/mine-offsets?name=${encodeURIComponent(mineName)}`);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/emissions/mine-offsets?name=${encodeURIComponent(mineName)}`);
             
             if (!response.ok) {
                 throw new Error('Backend response was not ok');
